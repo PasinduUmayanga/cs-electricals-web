@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/7yypjwai18y2rr2w?svg=true)](https://ci.appveyor.com/project/Mahadenamuththa/cs-electricals-web)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
