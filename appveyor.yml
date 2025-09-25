@@ -1,0 +1,37 @@
+version: "{build}"
+image: Visual Studio 2022
+
+environment:
+  NODEJS_VERSION: "20"
+  NEXT_TELEMETRY_DISABLED: "1"
+  CI: "true"
+
+install:
+  # Install Node.js
+  - ps: Install-Product node $env:NODEJS_VERSION
+  - node -v
+  - npm -v
+  - npm ci
+
+build: off # 👈 turn off MSBuild
+
+build_script:
+  - npm run build # Next.js build
+
+test_script:
+  - npm test --if-present
+
+artifacts:
+  # Upload Next.js output folder if needed
+  - path: .next
+    name: next-build
+  - path: out\**
+    name: static-export
+    type: zip
+
+cache:
+  - node_modules -> package-lock.json
+  - '.next\cache'
+  - '%LOCALAPPDATA%\npm-cache' # ✅ correct npm cache path on Windows
+  # Yarn:  '%LOCALAPPDATA%\Yarn\Cache'
+  # pnpm:  '%USERPROFILE%\.pnpm-store'
